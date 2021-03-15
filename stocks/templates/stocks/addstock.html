@@ -1,0 +1,79 @@
+{% extends 'stocks/base.html' %}
+{% block content %}
+
+
+
+<h1> addstock.....</h1>
+<br/>
+
+
+
+<form action ="{% url 'addstock'%}" class="form-inline my-2 my-lg-0" method = "POST">
+         {% csrf_token %}
+      <input class="form-control mr-sm-2" type="search" placeholder="Add ticker" aria-label="Search" name= "ticker"><br/>
+      <label for="quantity">Quantity</label><br />
+        <input type="input" class="form-control" id="quantity" name="quantity" placeholder="">
+      <button class="btn btn-outline-success my-2 " type="submit">Add Stock</button>
+    </form>
+
+<br/> <br/>
+
+
+
+<table class="table table-striped table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Company name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Previous close</th>
+      <th scope="col">Market cap</th>
+      <th scope="col">YTD Change</th>
+      <th scope="col">52week high</th>
+      <th scope="col">52week low</th>
+      <th scope="col">Sell Stocks</th>
+      {% comment %} <th scope="col">Quantity</th> {% endcomment %}
+     
+      
+    </tr>
+  </thead>
+  <tbody>
+{% if ticker %}
+    
+      
+            {% for list_item in output %}</th>
+               <tr>
+                <th scope="row">{{ list_item.companyName }} </th>
+                    <td>${{ list_item.latestPrice }}</td>
+                    <td>${{ list_item.previousClose }}</td>
+                    <td>${{ list_item.marketCap }}</td>
+                    <td>{{ list_item.ytdChange }}%</td>
+                    <td>${{ list_item.week52High }}</td>
+                    <td>${{ list_item.week52Low }}</td>
+                    
+
+                    <td><a href = "sellstock.html">sell stock</a></td>
+                    {% comment %} <td>{{ list_item.quantity}}</td> {% endcomment %}
+
+                </tr>
+
+            {% endfor %}
+           
+   
+{% endif %}
+  </tbody>
+</table>
+
+
+
+
+
+
+
+<br/><br/><br/> 
+
+
+
+
+
+
+{% endblock %}

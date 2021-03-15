@@ -1,0 +1,20 @@
+{% extends 'stocks/base.html' %}
+{% block content %}
+
+
+
+<h1> Sell stocks  .....</h1>
+<div class="text-center ">
+    {% if ticker %}
+
+            {% for item in ticker %}
+                <div class ="d-inline-flex p-2"><div class="d-inline p-2 bg-dark text-white">{{ item }}</div> <a href = "{% url 'delete' item.id %}" class="btn btn-info" >Sell Stocks--{{item}}</a>  <br/></div>
+
+            {% endfor %}    
+    {% else %}  
+        you Dont have any stocks.....
+
+    {% endif %}
+</div>    
+
+{% endblock %}

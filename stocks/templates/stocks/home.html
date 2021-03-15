@@ -1,0 +1,47 @@
+{% extends 'stocks/base.html' %}
+{% block content %}
+
+{% if user.is_authenticated %}
+    <p>welcome to my page:  {{ user.username}}</p>
+
+{% endif %}
+
+{% if ticker %}
+   {{ ticker }}
+{% endif %}   
+
+
+
+
+
+{% if api %}
+   {% if api == "Error...." %}
+        there was a problem with a ticker symbol 
+        please try again ...
+    {%else %}
+        
+        <h1>{{ api.companyName }}</h1><br/>
+        price : ${{ api.latestPrice }}<br/>
+        previous Close :{{ api.previousClose }}<br/>
+        Market Cap : {{ api.marketCap }}<br/>
+        YTD change : {{ api.ytdChange }}<br/>
+        52week high : {{ api.week52High }}<br/>
+        52week low : {{ api.week52Low }}<br/>
+
+
+
+  <!--    {% for key, value in api.items %}
+            {{ key }}: {{ value }}<br/>
+        {% endfor %}    -->
+
+
+
+
+    {% endif %}
+
+{% endif %}
+
+
+
+{% endblock %}
+
